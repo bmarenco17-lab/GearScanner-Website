@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── User profiles ─────────────────────────────────────────
+    // Each user can read/write their own profile.
+    // Admin can read all profiles.
+    match /userProfiles/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, write: if request.auth != null
+        && request.auth.token.email == 'admin@gearscanner.com';
+    }
+
+    // ── Per-user gear records ─────────────────────────────────
+    // Users can only read/write their own records.
+    // Admin can read/write any user's records.
+    match /users/{userId}/gearRecords/{recordId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, write: if request.auth != null
+        && request.auth.token.email == 'admin@gearscanner.com';
+    }
+
+    // ── Demo seed metadata ────────────────────────────────────
+    match /users/{userId}/meta/{doc} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, write: if request.auth != null
+        && request.auth.token.email == 'admin@gearscanner.com';
+    }
+  }
+}
