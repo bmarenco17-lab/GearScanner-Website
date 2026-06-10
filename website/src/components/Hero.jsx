@@ -135,7 +135,7 @@ export default function Hero() {
           <HeroBtn primary href="#contact">
             Request a Demo
           </HeroBtn>
-          <HeroBtn href="https://app.gearscanner.com/demo">
+          <HeroBtn href="https://app.gearscanner.net/demo">
             Try Live Demo
           </HeroBtn>
         </div>
