@@ -4,7 +4,7 @@ export default function CTA() {
   const [hover1, setHover1] = useState(false);
 
   return (
-    <section id="contact" style={{
+    <section style={{
       padding: '96px 0',
       background: 'linear-gradient(135deg, #0A1628 0%, #0D2040 50%, #0A1628 100%)',
       position: 'relative',
@@ -70,7 +70,7 @@ export default function CTA() {
           flexWrap: 'wrap', marginBottom: 40,
         }}>
           <a
-            href="mailto:hello@gearscanner.com"
+            href="#contact"
             onMouseEnter={() => setHover1(true)}
             onMouseLeave={() => setHover1(false)}
             style={{

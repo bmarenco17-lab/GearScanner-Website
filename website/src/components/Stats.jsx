@@ -1,10 +1,10 @@
 import React from 'react';
 
 const stats = [
-  { value: '30,000+', label: 'Fire Departments in the US' },
+  { value: 'Seconds', label: 'AI Label Scanning' },
   { value: 'NFPA 1971', label: 'Compliant Tracking' },
   { value: '10-Year', label: 'Retirement Alerts' },
-  { value: 'Seconds', label: 'AI Label Scanning' },
+  { value: '100%', label: 'Cloud Synced' },
 ];
 
 export default function Stats() {

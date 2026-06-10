@@ -85,7 +85,7 @@ export default function Testimonials() {
             fontWeight: 900, color: '#fff',
             letterSpacing: -1, lineHeight: 1.1,
           }}>
-            Trusted by Fire Departments
+            What Early Users Are Saying
           </h2>
         </div>
 

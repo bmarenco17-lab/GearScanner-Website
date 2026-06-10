@@ -57,11 +57,18 @@ export default function Footer() {
             </div>
             <p style={{
               fontSize: 14, color: 'rgba(255,255,255,0.4)',
-              lineHeight: 1.7, maxWidth: 280, marginBottom: 20,
+              lineHeight: 1.7, maxWidth: 280, marginBottom: 16,
             }}>
               AI-powered PPE management for fire departments. Stay NFPA compliant,
               track retirements automatically, and protect every firefighter.
             </p>
+            <a href="mailto:info@gearscanner.net" style={{
+              display: 'inline-block',
+              fontSize: 14, fontWeight: 600, color: '#2E86DE',
+              textDecoration: 'none', marginBottom: 20,
+            }}>
+              info@gearscanner.net
+            </a>
             {/* Social links */}
             <div style={{ display: 'flex', gap: 10 }}>
               {['𝕏', 'in', '📧'].map((s, i) => (

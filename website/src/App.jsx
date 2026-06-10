@@ -7,6 +7,7 @@ import HowItWorks from './components/HowItWorks';
 import Testimonials from './components/Testimonials';
 import Pricing from './components/Pricing';
 import CTA from './components/CTA';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Testimonials />
         <Pricing />
         <CTA />
+        <Contact />
       </main>
       <Footer />
     </>
