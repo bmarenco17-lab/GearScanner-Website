@@ -208,3 +208,4 @@ app.get('/api/health', (_, res) => res.json({ status: 'ok' }));
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`\n🔥 GearScanner backend running on port ${PORT}\n`);
 });
+// deploy fix
