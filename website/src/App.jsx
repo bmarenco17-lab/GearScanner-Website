@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import Stats from './components/Stats';
 import Features from './components/Features';
 import HowItWorks from './components/HowItWorks';
+import Checklist from './components/Checklist';
 import Reviews from './components/Reviews';
 import Pricing from './components/Pricing';
 import CTA from './components/CTA';
@@ -26,6 +27,7 @@ export default function App() {
         <Stats />
         <Features />
         <HowItWorks />
+        <Checklist />
         <Reviews />
         <Pricing />
         <CTA />
