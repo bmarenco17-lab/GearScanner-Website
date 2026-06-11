@@ -113,6 +113,13 @@ export default function EmployeeIDScreen({ navigation }) {
         >
           <Text style={styles.continueBtnText}>Continue to Gear Scan →</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{ backgroundColor: '#fff', borderRadius: 12, paddingVertical: 14, alignItems: 'center', marginTop: 12, borderWidth: 2, borderColor: '#B22222' }}
+          onPress={() => navigation.navigate('Checklist')}
+        >
+          <Text style={{ color: '#B22222', fontSize: 16, fontWeight: '700' }}>✅ NFPA 1850 Checklist</Text>
+        </TouchableOpacity>
       </ScrollView>
     </KeyboardAvoidingView>
   );
