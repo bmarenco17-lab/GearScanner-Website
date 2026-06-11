@@ -8,6 +8,7 @@ import EmployeeIDScreen from './src/screens/EmployeeIDScreen';
 import GearScanScreen from './src/screens/GearScanScreen';
 import ReviewScreen from './src/screens/ReviewScreen';
 import AdminScreen from './src/screens/AdminScreen';
+import ChecklistScreen from './src/screens/ChecklistScreen';
 
 const Stack = createNativeStackNavigator();
 const FIRE_RED = '#B22222';
@@ -51,7 +52,8 @@ export default function App() {
           component={AdminScreen}
           options={{ title: 'Admin — Export Data' }}
         />
-      </Stack.Navigator>
+      <Stack.Screen name="Checklist" component={ChecklistScreen} options={{ title: 'NFPA 1850 Checklist' }} />
+    </Stack.Navigator>
     </NavigationContainer>
   );
 }
