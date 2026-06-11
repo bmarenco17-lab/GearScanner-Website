@@ -18,6 +18,7 @@ import SuccessStep      from './screens/SuccessStep.jsx';
 import RecordsScreen    from './screens/RecordsScreen.jsx';
 import ExportScreen     from './screens/ExportScreen.jsx';
 import ChecklistScreen  from './screens/ChecklistScreen.jsx';
+import SetPasswordScreen from './screens/SetPasswordScreen.jsx';
 
 // ── localStorage key (used as cache for offline fallback) ────
 const LS_KEY = 'gearscanner_records';
@@ -34,6 +35,19 @@ function lsSave(records) {
 
 // ── Root — wraps everything in AuthProvider ───────────────────
 export default function App() {
+  // ── Invite / password-recovery links from Supabase ──────────
+  // Users coming from a "set your password" email land on
+  // /set-password with auth tokens in the URL hash. Handle that
+  // route before anything else, independent of Firebase auth.
+  const isSetPassword = typeof window !== 'undefined'
+    && (window.location.pathname === '/set-password'
+      || window.location.hash.includes('type=invite')
+      || window.location.hash.includes('type=recovery'));
+
+  if (isSetPassword) {
+    return <SetPasswordScreen />;
+  }
+
   return (
     <AuthProvider>
       <AppInner />

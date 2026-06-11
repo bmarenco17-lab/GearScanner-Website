@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const Anthropic = require('@anthropic-ai/sdk');
+const { supabaseAdmin } = require('./supabaseAdmin');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -137,6 +138,66 @@ RULES:
     res.json({ success: true, data: extracted });
   } catch (error) {
     console.error('Scan error:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ── Admin auth middleware ─────────────────────────────────────
+// Simple shared-secret check. Set ADMIN_API_KEY in the backend .env
+// and send it as the `x-admin-key` header from the admin panel.
+function requireAdminKey(req, res, next) {
+  const provided = req.headers['x-admin-key'];
+  if (!process.env.ADMIN_API_KEY) {
+    return res.status(500).json({ error: 'ADMIN_API_KEY is not configured on the server.' });
+  }
+  if (!provided || provided !== process.env.ADMIN_API_KEY) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  next();
+}
+
+// ── POST /api/admin/create-department ────────────────────────
+// Body: { email, departmentName, stationName? }
+// Creates a Supabase auth user for the department and emails them
+// an invite link to set their own password.
+app.post('/api/admin/create-department', requireAdminKey, async (req, res) => {
+  try {
+    if (!supabaseAdmin) {
+      return res.status(500).json({
+        error: 'Supabase is not configured. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in the backend .env.',
+      });
+    }
+
+    const { email, departmentName, stationName } = req.body;
+    if (!email || !email.trim()) {
+      return res.status(400).json({ error: 'email is required' });
+    }
+    if (!departmentName || !departmentName.trim()) {
+      return res.status(400).json({ error: 'departmentName is required' });
+    }
+
+    // Where Supabase sends the user after they click the invite link.
+    // The frontend should detect the recovery/invite session here and
+    // show a "set your password" form.
+    const redirectTo = `${process.env.FRONTEND_URL || 'https://app.gearscanner.net'}/set-password`;
+
+    const { data, error } = await supabaseAdmin.auth.admin.inviteUserByEmail(email.trim(), {
+      redirectTo,
+      data: {
+        departmentName: departmentName.trim(),
+        stationName: (stationName || '').trim(),
+        role: 'department',
+      },
+    });
+
+    if (error) {
+      console.error('Supabase invite error:', error.message);
+      return res.status(400).json({ error: error.message });
+    }
+
+    res.json({ success: true, userId: data.user?.id, email: data.user?.email });
+  } catch (error) {
+    console.error('create-department error:', error.message);
     res.status(500).json({ error: error.message });
   }
 });

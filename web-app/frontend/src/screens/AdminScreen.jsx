@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy, doc, updateDoc } from 'firebase/firestore';
+import axios from 'axios';
 import { db } from '../firebase.js';
 
 export default function AdminScreen() {
@@ -8,6 +9,12 @@ export default function AdminScreen() {
   const [selected,    setSelected]    = useState(null); // { uid, departmentName }
   const [deptRecords, setDeptRecords] = useState([]);
   const [loadingRecs, setLoadingRecs] = useState(false);
+
+  // ── Create department account form ────────────────────────
+  const [showCreate, setShowCreate]     = useState(false);
+  const [newDept,    setNewDept]        = useState({ departmentName: '', stationName: '', email: '' });
+  const [creating,   setCreating]       = useState(false);
+  const [createMsg,  setCreateMsg]      = useState(null); // { type: 'success' | 'error', text }
 
   // ── Load all department profiles ──────────────────────────
   useEffect(() => {
@@ -59,6 +66,38 @@ export default function AdminScreen() {
       setDepartments(prev => prev.map(d => d.uid === dept.uid ? { ...d, active: newState } : d));
     } catch (err) {
       alert('Failed to update: ' + err.message);
+    }
+  }
+
+  // ── Create + invite a new department ──────────────────────
+  async function handleCreateDept(e) {
+    e.preventDefault();
+    setCreateMsg(null);
+
+    if (!newDept.email || !newDept.departmentName) {
+      setCreateMsg({ type: 'error', text: 'Department name and email are required.' });
+      return;
+    }
+
+    setCreating(true);
+    try {
+      const apiBase = import.meta.env.VITE_API_URL || '';
+      await axios.post(
+        `${apiBase}/api/admin/create-department`,
+        {
+          email: newDept.email,
+          departmentName: newDept.departmentName,
+          stationName: newDept.stationName,
+        },
+        { headers: { 'x-admin-key': import.meta.env.VITE_ADMIN_API_KEY || '' } }
+      );
+      setCreateMsg({ type: 'success', text: `Invite sent to ${newDept.email}.` });
+      setNewDept({ departmentName: '', stationName: '', email: '' });
+    } catch (err) {
+      const text = err.response?.data?.error || err.message || 'Failed to create department.';
+      setCreateMsg({ type: 'error', text });
+    } finally {
+      setCreating(false);
     }
   }
 
@@ -136,6 +175,72 @@ export default function AdminScreen() {
         <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>
           {loading ? 'Loading…' : `${departments.length} department${departments.length !== 1 ? 's' : ''}`}
         </div>
+      </div>
+
+      {/* Create department account */}
+      <div className="card" style={{ marginBottom: 16 }}>
+        <div
+          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+          onClick={() => setShowCreate(s => !s)}
+        >
+          <div style={{ fontWeight: 800, fontSize: 14, color: '#0A1628' }}>
+            + Create Department Account
+          </div>
+          <div style={{ fontSize: 12, color: '#2E86DE', fontWeight: 700 }}>
+            {showCreate ? 'Hide' : 'New'}
+          </div>
+        </div>
+
+        {showCreate && (
+          <form onSubmit={handleCreateDept} style={{ marginTop: 12 }}>
+            <div className="field">
+              <label htmlFor="new-dept-name">Department Name</label>
+              <input
+                id="new-dept-name"
+                type="text"
+                placeholder="e.g. Springfield Fire Department"
+                value={newDept.departmentName}
+                onChange={e => setNewDept(d => ({ ...d, departmentName: e.target.value }))}
+                disabled={creating}
+              />
+            </div>
+
+            <div className="field">
+              <label htmlFor="new-dept-station">Station (optional)</label>
+              <input
+                id="new-dept-station"
+                type="text"
+                placeholder="e.g. Station 3"
+                value={newDept.stationName}
+                onChange={e => setNewDept(d => ({ ...d, stationName: e.target.value }))}
+                disabled={creating}
+              />
+            </div>
+
+            <div className="field">
+              <label htmlFor="new-dept-email">Email</label>
+              <input
+                id="new-dept-email"
+                type="email"
+                placeholder="contact@department.gov"
+                value={newDept.email}
+                onChange={e => setNewDept(d => ({ ...d, email: e.target.value }))}
+                autoComplete="off"
+                disabled={creating}
+              />
+            </div>
+
+            {createMsg && (
+              <div className={createMsg.type === 'success' ? 'auth-success' : 'auth-error'}>
+                {createMsg.type === 'success' ? '✅' : '⚠️'} {createMsg.text}
+              </div>
+            )}
+
+            <button type="submit" className="btn btn-auth-primary" disabled={creating}>
+              {creating ? 'Sending invite…' : 'Create & Send Invite →'}
+            </button>
+          </form>
+        )}
       </div>
 
       {loading ? (
