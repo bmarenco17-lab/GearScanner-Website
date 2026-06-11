@@ -85,7 +85,7 @@ export default function Contact() {
         'EmailJS is not configured. Set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, ' +
         'and VITE_EMAILJS_PUBLIC_KEY in website/.env (see .env.example).'
       );
-      setError('This form is not fully set up yet. Please email us directly at info@gearscanner.net.');
+      setError('This form is not fully set up yet. Please email us directly at gearscanner@outlook.com.');
       setSubmitting(false);
       return;
     }
@@ -102,7 +102,7 @@ export default function Contact() {
       // Log the real EmailJS error (status + text) so it's visible in the browser console.
       console.error('EmailJS error:', err?.status, err?.text || err);
       const detail = err?.text ? ` (${err.text})` : '';
-      setError(`Something went wrong sending your request${detail}. Please email us directly at info@gearscanner.net.`);
+      setError(`Something went wrong sending your request${detail}. Please email us directly at gearscanner@outlook.com.`);
     } finally {
       setSubmitting(false);
     }
@@ -183,11 +183,11 @@ export default function Contact() {
               <p style={{ fontSize: 14, color: '#64748B', marginBottom: 4 }}>
                 Prefer email?
               </p>
-              <a href="mailto:info@gearscanner.net" style={{
+              <a href="mailto:gearscanner@outlook.com" style={{
                 fontSize: 16, fontWeight: 700, color: '#2E86DE',
                 textDecoration: 'none',
               }}>
-                info@gearscanner.net
+                gearscanner@outlook.com
               </a>
             </div>
           </div>

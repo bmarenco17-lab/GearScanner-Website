@@ -62,12 +62,12 @@ export default function Footer() {
               AI-powered PPE management for fire departments. Stay NFPA compliant,
               track retirements automatically, and protect every firefighter.
             </p>
-            <a href="mailto:info@gearscanner.net" style={{
+            <a href="mailto:gearscanner@outlook.com" style={{
               display: 'inline-block',
               fontSize: 14, fontWeight: 600, color: '#2E86DE',
               textDecoration: 'none', marginBottom: 20,
             }}>
-              info@gearscanner.net
+              gearscanner@outlook.com
             </a>
             {/* Social links */}
             <div style={{ display: 'flex', gap: 10 }}>
