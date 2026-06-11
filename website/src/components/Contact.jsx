@@ -5,7 +5,7 @@ import emailjs from '@emailjs/browser';
 // Falls back to the previously hardcoded values if env vars aren't set.
 const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || 'nWsQIee18a2NgfIvg';
 const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'service_3w32ymp';
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_q7arnrb';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_f2u4xok';
 
 const EMAILJS_CONFIGURED = Boolean(
   EMAILJS_PUBLIC_KEY && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID

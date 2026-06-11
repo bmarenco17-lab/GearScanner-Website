@@ -17,6 +17,7 @@ import ReviewStep       from './screens/ReviewStep.jsx';
 import SuccessStep      from './screens/SuccessStep.jsx';
 import RecordsScreen    from './screens/RecordsScreen.jsx';
 import ExportScreen     from './screens/ExportScreen.jsx';
+import ChecklistScreen  from './screens/ChecklistScreen.jsx';
 
 // ── localStorage key (used as cache for offline fallback) ────
 const LS_KEY = 'gearscanner_records';
@@ -185,16 +186,18 @@ function MainApp({ userProfile, isDemo, isAdmin, logout }) {
   // ── Admin tabs ────────────────────────────────────────────
   const tabs = isAdmin
     ? [
-        { id: 'dashboard', icon: '🛡️', label: 'Dashboard' },
-        { id: 'admin',     icon: '⚙️', label: 'Admin'     },
-        { id: 'records',   icon: '📋', label: 'Records'   },
-        { id: 'export',    icon: '📊', label: 'Export'    },
+        { id: 'dashboard',  icon: '🛡️', label: 'Dashboard' },
+        { id: 'admin',      icon: '⚙️', label: 'Admin'     },
+        { id: 'records',    icon: '📋', label: 'Records'   },
+        { id: 'checklist',  icon: '✅', label: 'Checklist' },
+        { id: 'export',     icon: '📊', label: 'Export'    },
       ]
     : [
-        { id: 'dashboard', icon: '🛡️', label: 'Dashboard' },
-        { id: 'scan',      icon: '📷', label: 'Scan'      },
-        { id: 'records',   icon: '📋', label: 'Records'   },
-        { id: 'export',    icon: '📊', label: 'Export'    },
+        { id: 'dashboard',  icon: '🛡️', label: 'Dashboard' },
+        { id: 'scan',       icon: '📷', label: 'Scan'      },
+        { id: 'records',    icon: '📋', label: 'Records'   },
+        { id: 'checklist',  icon: '✅', label: 'Checklist' },
+        { id: 'export',     icon: '📊', label: 'Export'    },
       ];
 
   return (
@@ -317,8 +320,9 @@ function MainApp({ userProfile, isDemo, isAdmin, logout }) {
           </>
         )}
 
-        {activeTab === 'records' && <RecordsScreen records={records} deleteRecord={deleteRecord} />}
-        {activeTab === 'export'  && <ExportScreen  records={records} />}
+        {activeTab === 'records'   && <RecordsScreen records={records} deleteRecord={deleteRecord} />}
+        {activeTab === 'checklist' && <ChecklistScreen />}
+        {activeTab === 'export'    && <ExportScreen  records={records} />}
       </main>
 
       {/* ── Tab bar ── */}
