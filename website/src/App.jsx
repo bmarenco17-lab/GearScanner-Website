@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import LockScreen, { isUnlocked } from './components/LockScreen';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
@@ -11,6 +12,12 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
+  const [unlocked, setUnlocked] = useState(isUnlocked());
+
+  if (!unlocked) {
+    return <LockScreen onUnlock={() => setUnlocked(true)} />;
+  }
+
   return (
     <>
       <Navbar />
