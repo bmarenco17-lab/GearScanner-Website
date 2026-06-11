@@ -320,6 +320,14 @@ export default function Reviews() {
             grid-template-columns: 1fr !important;
           }
         }
+        @media (max-width: 640px) {
+          section:has(> .container) {
+            padding: 64px 0 !important;
+          }
+          section > .container > div:last-child {
+            padding: 28px 20px !important;
+          }
+        }
       `}</style>
     </section>
   );

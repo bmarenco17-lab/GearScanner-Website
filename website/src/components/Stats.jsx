@@ -14,7 +14,7 @@ export default function Stats() {
       borderTop: '1px solid rgba(46,134,222,0.2)',
       borderBottom: '1px solid rgba(46,134,222,0.2)',
     }}>
-      <div className="container" style={{
+      <div className="container stats-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(4, 1fr)',
         gap: 0,
@@ -24,6 +24,7 @@ export default function Stats() {
             padding: '32px 24px',
             textAlign: 'center',
             borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+            borderBottom: 'none',
           }}>
             <div style={{
               fontSize: 'clamp(22px, 3vw, 32px)',
@@ -49,6 +50,20 @@ export default function Stats() {
       <style>{`
         @media (max-width: 640px) {
           .stats-grid { grid-template-columns: repeat(2,1fr) !important; }
+          .stats-grid > div:nth-child(odd) {
+            border-right: 1px solid rgba(255,255,255,0.07) !important;
+          }
+          .stats-grid > div:nth-child(1),
+          .stats-grid > div:nth-child(2) {
+            border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+          }
+          .stats-grid > div:nth-child(2),
+          .stats-grid > div:nth-child(4) {
+            border-right: none !important;
+          }
+          .stats-grid > div {
+            padding: 24px 16px !important;
+          }
         }
       `}</style>
     </section>

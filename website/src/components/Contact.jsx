@@ -364,10 +364,14 @@ export default function Contact() {
         @media (max-width: 860px) {
           #contact .container > div {
             grid-template-columns: 1fr !important;
+            gap: 40px !important;
           }
           #contact .container > div > div:first-child {
             padding-top: 0 !important;
           }
+        }
+        @media (max-width: 640px) {
+          #contact { padding: 64px 0 !important; }
         }
         @media (max-width: 480px) {
           #contact .container > div > div:last-child {

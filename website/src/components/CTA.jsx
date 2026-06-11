@@ -4,7 +4,7 @@ export default function CTA() {
   const [hover1, setHover1] = useState(false);
 
   return (
-    <section style={{
+    <section id="cta" style={{
       padding: '96px 0',
       background: 'linear-gradient(135deg, #0A1628 0%, #0D2040 50%, #0A1628 100%)',
       position: 'relative',
@@ -106,6 +106,12 @@ export default function CTA() {
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          #cta { padding: 64px 0 !important; }
+        }
+      `}</style>
     </section>
   );
 }

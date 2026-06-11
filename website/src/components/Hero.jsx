@@ -50,7 +50,7 @@ export default function Hero() {
       }} />
 
       {/* Content */}
-      <div className="container" style={{
+      <div className="container hero-content" style={{
         position: 'relative', zIndex: 2,
         paddingTop: 160, paddingBottom: 100,
         display: 'flex', flexDirection: 'column',
@@ -141,7 +141,7 @@ export default function Hero() {
         </div>
 
         {/* Trust indicators */}
-        <div style={{
+        <div className="hero-trust" style={{
           display: 'flex', gap: 24, marginTop: 52, flexWrap: 'wrap',
           opacity: loaded ? 1 : 0,
           transition: 'all 0.7s ease 0.38s',
@@ -165,7 +165,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div style={{
+      <div className="hero-scroll" style={{
         position: 'absolute', bottom: 32, left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
@@ -177,6 +177,34 @@ export default function Hero() {
           background: 'linear-gradient(to bottom, rgba(255,255,255,0.6), transparent)',
         }} />
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          #home {
+            min-height: 100vh;
+          }
+          #home .hero-content {
+            padding-top: 110px !important;
+            padding-bottom: 64px !important;
+          }
+          #home .hero-trust {
+            gap: 14px 20px !important;
+            margin-top: 36px !important;
+          }
+          #home .hero-scroll {
+            display: none;
+          }
+        }
+        @media (max-width: 480px) {
+          #home .hero-content {
+            padding-top: 96px !important;
+            padding-bottom: 48px !important;
+          }
+          #home .hero-trust {
+            display: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -73,7 +73,7 @@ export default function HowItWorks() {
           position: 'relative',
         }}>
           {/* Connector line */}
-          <div style={{
+          <div className="connector-line" style={{
             position: 'absolute',
             top: 32, left: '18%', right: '18%',
             height: 2,
@@ -134,8 +134,15 @@ export default function HowItWorks() {
 
       <style>{`
         @media (max-width: 768px) {
+          #how-it-works {
+            padding: 64px 0;
+          }
+          #how-it-works .container > div:first-child {
+            margin-bottom: 40px !important;
+          }
           #how-it-works .container > div:last-child {
             grid-template-columns: 1fr !important;
+            gap: 40px !important;
           }
           #how-it-works .connector-line { display: none; }
         }

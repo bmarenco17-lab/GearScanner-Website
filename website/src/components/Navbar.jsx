@@ -128,10 +128,12 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div style={{
+        <div className="mobile-menu" style={{
           background: '#0D2040',
           borderTop: '1px solid rgba(46,134,222,0.2)',
           padding: '16px 24px 20px',
+          maxHeight: 'calc(100vh - 68px)',
+          overflowY: 'auto',
         }}>
           {navLinks.map(l => (
             <a key={l.label} href={l.href}
@@ -166,6 +168,9 @@ export default function Navbar() {
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: block !important; }
+        }
+        @media (max-width: 640px) {
+          .mobile-menu { padding: 16px 16px 20px !important; }
         }
       `}</style>
     </nav>

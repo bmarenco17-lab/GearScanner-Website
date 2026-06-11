@@ -148,6 +148,12 @@ export default function Features() {
             grid-template-columns: repeat(2, 1fr) !important;
           }
         }
+        @media (max-width: 640px) {
+          #features { padding: 64px 0 !important; }
+          #features .container > div:first-child {
+            margin-bottom: 40px !important;
+          }
+        }
         @media (max-width: 560px) {
           #features .container > div:last-child {
             grid-template-columns: 1fr !important;

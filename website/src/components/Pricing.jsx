@@ -123,6 +123,12 @@ export default function Pricing() {
             margin: 0 auto;
           }
         }
+        @media (max-width: 640px) {
+          #pricing { padding: 64px 0 !important; }
+          #pricing .container > div:nth-child(2) > div {
+            transform: none !important;
+          }
+        }
       `}</style>
     </section>
   );
