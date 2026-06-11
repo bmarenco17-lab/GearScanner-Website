@@ -152,7 +152,7 @@ function RetirementModal({ fields, daysOverdue, retirementDate, onDoNotSave, onS
           ⚠️ This gear is {yearsOverdue} years past its retirement date
         </div>
         <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.8)', marginTop: 4 }}>
-          Per NFPA 1971, gear must not be used after 10 years from manufacture.
+          Per NFPA 1850, gear must not be used after 10 years from manufacture.
         </div>
       </div>
 

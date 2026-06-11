@@ -488,7 +488,7 @@ function RetirementAccordion({ retirementAlerts }) {
           ) : (
             <>
               <p style={{ fontSize: 11, color: '#9BA5B4', margin: '12px 0 8px', fontWeight: 500 }}>
-                NFPA 1971 requires retirement 10 years from manufacture date.
+                NFPA 1850 requires retirement 10 years from manufacture date.
               </p>
               {retirementAlerts.map((r, i) => {
                 const s       = RET_STATUS[r.retKey];

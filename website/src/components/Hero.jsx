@@ -79,7 +79,7 @@ export default function Hero() {
             fontSize: 13, fontWeight: 600,
             color: 'rgba(255,255,255,0.9)',
             letterSpacing: 0.5,
-          }}>NFPA 1971 Compliant · AI-Powered</span>
+          }}>NFPA 1850 Compliant · AI-Powered</span>
         </div>
 
         {/* Headline */}

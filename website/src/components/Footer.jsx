@@ -21,7 +21,7 @@ const footerLinks = [
   },
   {
     heading: 'Resources',
-    links: ['Documentation', 'NFPA 1971 Guide', 'Help Center', 'API Docs', 'Status'],
+    links: ['Documentation', 'NFPA 1850 Guide', 'Help Center', 'API Docs', 'Status'],
   },
   {
     heading: 'Legal',

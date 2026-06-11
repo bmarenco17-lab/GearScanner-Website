@@ -2,7 +2,7 @@ import React from 'react';
 
 const stats = [
   { value: 'Seconds', label: 'AI Label Scanning' },
-  { value: 'NFPA 1971', label: 'Compliant Tracking' },
+  { value: 'NFPA 1850', label: 'Compliant Tracking' },
   { value: '10-Year', label: 'Retirement Alerts' },
   { value: '100%', label: 'Cloud Synced' },
 ];

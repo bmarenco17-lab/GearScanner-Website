@@ -6,7 +6,9 @@ const Anthropic = require('@anthropic-ai/sdk');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*',
+}));
 app.use(express.json({ limit: '15mb' }));
 
 if (!process.env.ANTHROPIC_API_KEY) {
@@ -86,7 +88,7 @@ Return a valid JSON object with EXACTLY these 18 fields:
   "measureHelmet":   "hat/helmet size, e.g. L/XL or 7.5",
   "measureGloves":   "glove size, e.g. XL or 10",
   "measureBoots":    "boot size, e.g. 10W or 11",
-  "nfpaStandard":    "NFPA standard number, e.g. NFPA 1971",
+  "nfpaStandard":    "NFPA standard number, e.g. NFPA 1850",
   "complianceInfo":  "certification body, edition year, compliance notes",
   "manufactureDate": "manufacture date exactly as shown on label",
   "expirationDate":  "service life expiration date if shown",
@@ -142,6 +144,6 @@ RULES:
 // ── Health check ─────────────────────────────────────────────
 app.get('/api/health', (_, res) => res.json({ status: 'ok' }));
 
-app.listen(PORT, () => {
-  console.log(`\n🔥 GearScanner backend running on http://localhost:${PORT}\n`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n🔥 GearScanner backend running on port ${PORT}\n`);
 });

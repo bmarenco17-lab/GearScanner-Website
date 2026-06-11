@@ -24,9 +24,9 @@ function serial(mfr, year, seed) {
 
 // ── NFPA edition by manufacture year ─────────────────────────
 function nfpa(year) {
-  if (year >= 2023) return { std: 'NFPA 1971', edition: '2023 Edition' };
-  if (year >= 2018) return { std: 'NFPA 1971', edition: '2018 Edition' };
-  return               { std: 'NFPA 1971', edition: '2013 Edition' };
+  if (year >= 2023) return { std: 'NFPA 1850', edition: '2023 Edition' };
+  if (year >= 2018) return { std: 'NFPA 1850', edition: '2018 Edition' };
+  return               { std: 'NFPA 1850', edition: '2013 Edition' };
 }
 
 // ── Scan timestamp: days before today ────────────────────────

@@ -67,7 +67,8 @@ export default function GearScanStep({ value, onChange, employeeInfo, onNext, on
     setAnalyzing(true);
     setError('');
     try {
-      const res = await axios.post('/api/scan-label', {
+      const apiBase = import.meta.env.VITE_API_URL || '';
+      const res = await axios.post(`${apiBase}/api/scan-label`, {
         base64Image: value.photoBase64,
         mediaType: value.mediaType,
       });

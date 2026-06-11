@@ -387,7 +387,7 @@ function RetirementTab() {
     <div>
       <SectionTitle
         title="Retirement Tracking"
-        sub="NFPA 1971 — gear must be retired 10 years from manufacture date"
+        sub="NFPA 1850 — gear must be retired 10 years from manufacture date"
       />
 
       <RetirementGroup
