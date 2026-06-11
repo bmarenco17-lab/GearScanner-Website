@@ -140,11 +140,29 @@ export default function Features() {
         }}>
           {features.map(f => <FeatureCard key={f.title} feature={f} />)}
         </div>
+
+        {/* Checklist callout */}
+        <div className="features-callout" style={{
+          marginTop: 24,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 16,
+          background: 'rgba(46,134,222,0.06)',
+          border: '1px solid rgba(46,134,222,0.18)',
+          borderRadius: 14,
+          padding: '20px 28px',
+        }}>
+          <span style={{ fontSize: 24, flexShrink: 0 }}>✅</span>
+          <p style={{ fontSize: 15, color: '#334155', lineHeight: 1.6 }}>
+            <strong style={{ color: '#0A1628' }}>Free NFPA 1850 gear inventory &amp; compliance checklist</strong> —
+            available right inside the GearScanner app, no extra setup required.
+          </p>
+        </div>
       </div>
 
       <style>{`
         @media (max-width: 900px) {
-          #features .container > div:last-child {
+          #features .container > div:nth-child(2) {
             grid-template-columns: repeat(2, 1fr) !important;
           }
         }
@@ -155,8 +173,15 @@ export default function Features() {
           }
         }
         @media (max-width: 560px) {
-          #features .container > div:last-child {
+          #features .container > div:nth-child(2) {
             grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 600px) {
+          #features .features-callout {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            text-align: left;
           }
         }
       `}</style>
