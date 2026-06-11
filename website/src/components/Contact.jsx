@@ -1,9 +1,15 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 
-const EMAILJS_PUBLIC_KEY  = 'nWsQIee18a2NgfIvg';
-const EMAILJS_SERVICE_ID  = 'service_3w32ymp';
-const EMAILJS_TEMPLATE_ID = 'template_q7arnrb';
+// EmailJS credentials — set these in website/.env (see .env.example).
+// Falls back to the previously hardcoded values if env vars aren't set.
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || 'nWsQIee18a2NgfIvg';
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'service_3w32ymp';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_q7arnrb';
+
+const EMAILJS_CONFIGURED = Boolean(
+  EMAILJS_PUBLIC_KEY && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID
+);
 
 // ── Shared input styles ────────────────────────────────────────
 const baseInput = {
@@ -74,6 +80,16 @@ export default function Contact() {
     setSubmitting(true);
     setError('');
 
+    if (!EMAILJS_CONFIGURED) {
+      console.error(
+        'EmailJS is not configured. Set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, ' +
+        'and VITE_EMAILJS_PUBLIC_KEY in website/.env (see .env.example).'
+      );
+      setError('This form is not fully set up yet. Please email us directly at info@gearscanner.net.');
+      setSubmitting(false);
+      return;
+    }
+
     try {
       await emailjs.sendForm(
         EMAILJS_SERVICE_ID,
@@ -83,8 +99,10 @@ export default function Contact() {
       );
       setSubmitted(true);
     } catch (err) {
-      console.error('EmailJS error:', err);
-      setError('Something went wrong. Please try again.');
+      // Log the real EmailJS error (status + text) so it's visible in the browser console.
+      console.error('EmailJS error:', err?.status, err?.text || err);
+      const detail = err?.text ? ` (${err.text})` : '';
+      setError(`Something went wrong sending your request${detail}. Please email us directly at info@gearscanner.net.`);
     } finally {
       setSubmitting(false);
     }
